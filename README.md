@@ -38,5 +38,35 @@ The two remaining rows are summed using a Carry Propagate Adder (CPA) to produce
 
 ## Comparison of Multiplication Techniques
 
-<img width="1200" height="794" alt="image" src="https://github.com/user-attachments/assets/2ebf16a4-02f4-40ab-9583-65e361d3cc64" />
 
+
+## Hardware & Software Specifications
+
+### 1) Hardware
+
+* FPGA      :  AMD Xilinx Spartan-6 XC6SLX9 (CSG324 package)
+* Memory  :    512 Mb LPDDR @ 166 MHz
+* Flash  :    16 Mb SPI Flash (M25P16)
+* I/O     :   8 LEDs, 6 push buttons, 8-way DIP switch
+* Display  :  3-digit seven-segment display
+* Programming : USB 2.0 (JTAG + USB)
+
+### 2) Software
+
+* Xilinx ISE : 14.7	Synthesis, Implementation, Bitstream Generation
+* Verilog HDL	: Hardware Description Language
+* ISim / ModelSim	: Functional & Timing Simulation
+
+
+##  References
+G. Challa Ram et al., Design of Delay Efficient Modified 16-bit Wallace Multiplier, IEEE RTEICT 2016
+
+Sujan Sarkar, Jishan Mehedi, Design of Hybrid (CSACSkA) Adder for Improvement of Propagation Delay, ICRCICN 2017
+
+Shahzad Asif and Yinan Kong, Low-Area Wallace Multiplier, Hindawi VLSI Design, 2014
+
+C. S. Wallace, A Suggestion for Fast Multipliers, IEEE Trans. Electronics Computer, Vol. EC-13, Feb 1964
+
+Kai Hwang, Computer Arithmetic: Principles, Architecture, and Design, John Wiley & Sons, 1979
+
+Weste, Eshraghian & Kamran, CMOS VLSI Design, 3rd Edition, Pearson Education, 2005
