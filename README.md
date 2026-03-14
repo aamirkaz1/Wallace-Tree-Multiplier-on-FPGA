@@ -58,10 +58,6 @@ The partial product matrix is reduced layer by layer using:
 * **Final Addition**
 The two remaining rows are summed using a Carry Propagate Adder (CPA) to produce the final 8-bit product.
 
-## Comparison of Multiplication Techniques
-
-
-
 ## Hardware & Software Specifications
 
 ### 1) Hardware
@@ -88,6 +84,12 @@ arranged in a tree-like format. This reduces the number of partial product rows 
 until only two rows remain, which are then added using a conventional fast adder to produce the
 final multiplication result. 
 
+
+<image of Multiplication of 4-bit Wallace tree >
+<image of Representation of Half adder & Full adder>
+
+## Partial Product Generation in Wallace Tree Multiplier
+
 The partial products along each diagonal line are aligned according to their binary weight, which
 directly affects how they are summed in the next reduction stages. This representation clearly
 illustrates how multiple rows of partial products are formed during binary multiplication. The
@@ -96,8 +98,38 @@ efficiently as possible using carry-save adders arranged in a tree-like structur
 height of the partial product tree at each stage, the Wallace Tree approach ensures faster
 computation compared to conventional add-and-shift methods.
 
-<image of Multiplication of 4-bit Wallace tree >
-<image of Representation of Half adder & Full adder>
+<image of Partial Product Generation>
+
+## Carry Save Adder
+
+In our project, we are designing a 4×4-bit multiplier using the Carry Save Adder (CSA)
+technique to efficiently perform partial product addition. Before diving into the design, it’s
+important to understand how a CSA works and why it is beneficial for multiplication.
+A Carry Save Adder is used when we need to add three or more binary numbers simultaneously.
+Instead of immediately propagating the carry like in ripple or carry-lookahead adders, CSA
+delays the carry propagation until the final addition step. 
+
+This makes the addition process significantly faster, especially in applications like multipliers,
+where multiple partial products are generated. In 4×4 multiplication, we generate 4 partial
+product rows (since the multiplier is 4 bits wide). These partial products must be added together
+to get the final 8-bit result. Traditional adders would perform this addition sequentially, with
+each step waiting for the carry to propagate — which increases the delay. 
+
+<image of The Carry Save Adder (CSA) block, and the Full Adder have the same circuitry>
+
+## Wallace Tree Implementation
+
+Conventional multiplication follows the standard algorithm like manual multiplication. For
+binary numbers, each bit of the multiplier is multiplied with the entire multiplicand to generate
+partial products, which are then sequentially added using ripple carry adders or similar methods.
+Wallace Tree multiplication is an optimized method for multiplying binary numbers. It reduces
+the number of sequential addition steps by using a tree-like structure of Carry Save Adders
+(CSAs) to add multiple partial products in parallel. The process continues until only two rows of
+bits remain, which are then added using a carry propagate adder (like a ripple carry or carry
+lookahead adder). 
+
+<image of comparision>
+<image of Wallace tree implementation>
 
 
 ##  References
