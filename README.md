@@ -1,22 +1,44 @@
 # Wallace-Tree-Multiplier-on-FPGA
 
-## Overview
-Multiplication is one of the most fundamental operations in digital systems, widely used in Digital Signal Processing (DSP), cryptography, and embedded systems. Traditional multipliers often suffer from significant latency due to carry propagation. 
+## Objective
+The goal of this project was to design and implement a high-speed 4×4 unsigned binary multiplier in Verilog using the Carry Save Adder (CSA) technique and Wallace Tree architecture. Specifically, the design focuses on reducing the number of generated partial products and minimizing half adder usage to lower circuit complexity and power consumption. The multiplier was synthesized and deployed on a Xilinx Spartan-6 FPGA, with performance evaluated across key metrics including speed, power efficiency, and hardware resource utilization.
 
-This project implements a **4×4 Wallace Tree Multiplier** using the Carry Save Adder (CSA) technique in Verilog HDL, targeting the **Xilinx Spartan-6 (XC6SLX9)** FPGA. The design achieves:
-* **Reduced critical path delay** through parallel partial product reduction.
-* **Lower power consumption** by minimizing the number of adder stages.
-* **Efficient hardware utilization** using only 7 LUTs and 4 occupied slices on the FPGA.
-
-## Architecture
+## Architectural Block Diagram
 The multiplier is organized into pipeline stages to optimize speed and resource usage:
 
-```text
-[Multiplier A] ──┐
-                 ├──► [Partial Product Generator] ──► [Wallace Tree Reduction] ──► [Carry Propagate Adder] ──► [8-bit Product]
-[Multiplicand B] ┘         (AND gates)                  (Half/Full Adders, CSA)          (RCA/CLA)
+<image>
 
-```
+Inputs: Two 4-bit unsigned numbers (Multiplier A and Multiplicand B).
+Partial Product Generator: Generates 16 partial products using AND gates.
+Wallace Tree Reduction: Uses half adders (HAs) and full adders (FAs) to reduce partial
+products. Implemented using Carry Save Adders (CSA) for efficient addition.
+Final Carry Propagate Adder (CPA): Computes the final sum to generate the 8-bit product.
+Output: An 8-bit product representing the multiplication result. 
+
+## Theory
+
+A Wallace tree is a very useful hardware function that is used in digital circuits for multiplies
+two integers. In Wallace method the multiplication of two numbers is done by reducing the
+partial product matrix into a two-row matrix by a half adder, full adder, carry-save adder & these
+two rows are added utilizing a fast carry propagate adder to produce the output product. In this
+Wallace tree method, we used half adder for summation of 2 bit and full adder for summation of
+3 bit. For multiplicands of higher than 8-bits this advantage is more beneficial, because the
+addition of partial products is low in Wallace tree and hence increases speed. Here each bit of
+each partial product in every column is added together by a set of counters used in parallel so
+that no curry is propagated further. Then this matrix is reduced by another set of counters until a
+two-row matrix generates.
+In the Wallace tree approach, multiplication is achieved by reducing the partial product matrix
+Department Of Electronics and Telecommunication Engineering 4
+into a two-row matrix. This is done using a hierarchical structure that employs half adders, full
+adders, and carry-save adders. Initially, the partial products generated from the multiplication of
+bits are organized into a matrix form. Each column of this matrix contains bits that represent
+partial products of the input operands. To reduce the matrix, the Wallace tree uses adders in
+stages. A half adder is used when there are only two bits to be added in a column, and a full
+adder is used when there are three bits. The output from these adders includes a sum and a carry,
+where the sum remains in the same column, and the carry is moved to the next higher column.
+These stages are repeated iteratively until the partial product matrix is reduced to only two rows.
+These final two rows are then added using a fast carry propagate adder to produce the final
+product. 
 ## Methodology 
 * **Partial Product Generation**
   
@@ -56,6 +78,26 @@ The two remaining rows are summed using a Carry Propagate Adder (CPA) to produce
 * Xilinx ISE : 14.7	Synthesis, Implementation, Bitstream Generation
 * Verilog HDL	: Hardware Description Language
 * ISim / ModelSim	: Functional & Timing Simulation
+
+## Calculations 
+
+The Wallace Tree Multiplier is designed to minimize the overall delay by reducing the number
+of sequential addition steps. After the partial products are generated, they are passed on to the
+reduction stage, where they are efficiently summed using a structure of carry-save adders
+arranged in a tree-like format. This reduces the number of partial product rows layer by layer
+until only two rows remain, which are then added using a conventional fast adder to produce the
+final multiplication result. 
+
+The partial products along each diagonal line are aligned according to their binary weight, which
+directly affects how they are summed in the next reduction stages. This representation clearly
+illustrates how multiple rows of partial products are formed during binary multiplication. The
+goal of the Wallace Tree method is to reduce these multiple rows into just two rows as
+efficiently as possible using carry-save adders arranged in a tree-like structure. By reducing the
+height of the partial product tree at each stage, the Wallace Tree approach ensures faster
+computation compared to conventional add-and-shift methods.
+
+<image of Multiplication of 4-bit Wallace tree >
+<image of Representation of Half adder & Full adder>
 
 
 ##  References
