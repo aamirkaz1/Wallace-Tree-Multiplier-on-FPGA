@@ -37,5 +37,6 @@ The partial product matrix is reduced layer by layer using:
 The two remaining rows are summed using a Carry Propagate Adder (CPA) to produce the final 8-bit product.
 
 ## Comparison of Multiplication Techniques
-  
+
+<img width="1200" height="794" alt="image" src="https://github.com/user-attachments/assets/2ebf16a4-02f4-40ab-9583-65e361d3cc64" />
 
