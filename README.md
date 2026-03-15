@@ -27,8 +27,8 @@ addition of partial products is low in Wallace tree and hence increases speed. H
 each partial product in every column is added together by a set of counters used in parallel so
 that no curry is propagated further. Then this matrix is reduced by another set of counters until a
 two-row matrix generates.
+
 In the Wallace tree approach, multiplication is achieved by reducing the partial product matrix
-Department Of Electronics and Telecommunication Engineering 4
 into a two-row matrix. This is done using a hierarchical structure that employs half adders, full
 adders, and carry-save adders. Initially, the partial products generated from the multiplication of
 bits are organized into a matrix form. Each column of this matrix contains bits that represent
